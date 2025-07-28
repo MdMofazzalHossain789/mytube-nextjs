@@ -8,9 +8,11 @@ const page = async () => {
 
   return (
     <HydrateClient>
-      <Suspense fallback={<p>Loading...</p>} />
-      <ErrorBoundary fallback={<p>Error...</p>} />
-      <PageClient />
+      <Suspense fallback={<p>Loading...</p>}>
+        <ErrorBoundary fallback={<p>Error...</p>}>
+          <PageClient />
+        </ErrorBoundary>
+      </Suspense>
     </HydrateClient>
   );
 };
