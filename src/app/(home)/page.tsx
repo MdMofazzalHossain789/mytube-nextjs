@@ -1,20 +1,11 @@
-import React, { Suspense } from "react";
 import { HydrateClient, trpc } from "@/trpc/server";
-import { PageClient } from "./client";
-import { ErrorBoundary } from "react-error-boundary";
 
-const page = async () => {
-  void trpc.hello.prefetch({ text: "Antonio" });
+export const dynamic = "force-dynamic"; // Force dynamic rendering
 
-  return (
-    <HydrateClient>
-      <Suspense fallback={<p>Loading...</p>}>
-        <ErrorBoundary fallback={<p>Error...</p>}>
-          <PageClient />
-        </ErrorBoundary>
-      </Suspense>
-    </HydrateClient>
-  );
+const page = () => {
+  void trpc.categories.getMany.prefetch();
+
+  return <HydrateClient>Home</HydrateClient>;
 };
 
 export default page;
